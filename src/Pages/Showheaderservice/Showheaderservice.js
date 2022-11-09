@@ -10,7 +10,7 @@ function Showheaderservice({servic}) {
        <h2 className="card-title">{name}</h2>
        <p>{description.slice(0,100)}</p>
        <div className="card-actions justify-end">
-         <button className="btn btn-primary">view details</button>
+        <Link to='/servicesDetails'><button className="btn btn-primary">view details</button></Link> 
        </div>
      </div>    
    </div>

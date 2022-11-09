@@ -4,6 +4,7 @@ import Main from '../Layout/Main/Main'
 import ErrorPage from '../Pages/ErrorPage/ErrorPage'
 import Home from '../Pages/Home/Home'
 import Service from '../Pages/Service/Service'
+import Showheaderservice from '../Pages/Showheaderservice/Showheaderservice'
 
 const Routes = createBrowserRouter([
      {
@@ -19,6 +20,10 @@ const Routes = createBrowserRouter([
                {
                     path: '/services',
                     element: <Service></Service>
+               },
+               {
+                    path:'/servicesDetails',
+                    element: <Showheaderservice></Showheaderservice>
                }
           ]
      }
