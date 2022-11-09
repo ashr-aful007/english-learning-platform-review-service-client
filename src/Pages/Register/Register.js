@@ -14,9 +14,12 @@ function Register() {
           createUser(email, password)
           .then(result => {
                const user = result.user
+               if(user){
+                    alert('sign up success fully')
+               }
                setUser(user)
           })
-          .catch(err => console.error(err))
+          .catch(err => console.log(err))
           
      }
      

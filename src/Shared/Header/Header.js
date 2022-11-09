@@ -13,7 +13,8 @@ function Header() {
 			<Link to="/myReviews" href="#" aria-label="Back to homepage" className="flex items-center p-2">
 			<div>
         user img
-	   
+	   {user?.email}
+
 
       </div>
 			</Link>
