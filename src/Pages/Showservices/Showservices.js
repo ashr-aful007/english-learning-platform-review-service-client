@@ -12,7 +12,7 @@ function Showservices({servic}) {
           <p>{description.slice(0,149)}</p>
           <div className="card-actions mt-4">
             <p className='font-semibold'>price: ${price}</p>
-              <Link to='/servicesDetails'></Link> <button className="btn btn-primary">See details</button>
+              <Link to={`/servicesDetails/${_id}`}><button className="btn btn-primary">See details</button></Link> 
           </div>
           </div>
           </div>
