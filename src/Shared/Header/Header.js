@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 function Header() {
+	const {user} = useContext(AuthContext)
+	
   return (
     <div>
      <header className="p-3 dark:bg-gray-800 dark:text-gray-100 bg-purple-600">
@@ -10,6 +13,8 @@ function Header() {
 			<Link to="/myReviews" href="#" aria-label="Back to homepage" className="flex items-center p-2">
 			<div>
         user img
+	   
+
       </div>
 			</Link>
 			<ul className="items-stretch hidden space-x-3 lg:flex">

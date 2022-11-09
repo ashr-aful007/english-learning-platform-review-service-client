@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 function Login() {
+     const {signIn} = useContext(AuthContext)
   return (
     <div className='h-screen w-full sm:w-1/2  mx-auto mt-12'>
      <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-purple-600 dark:text-gray-100">
@@ -43,7 +45,7 @@ function Login() {
 		</button>
 	</div>
 	<p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
-		<Link to='/signUp' href="#" className="underline dark:text-gray-100">Sign up</Link>
+		<Link to='/register' href="#" className="underline dark:text-gray-100">Sign up</Link>
 	</p>
   </div>
     </div>
