@@ -6,7 +6,7 @@ import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 
 function Login() {
-     const {signIn,setUser,signInwithgoogle} = useContext(AuthContext)
+     const {signIn,setUser,signInwithgoogle,loading} = useContext(AuthContext)
      const provider = new GoogleAuthProvider()
 
      //google sign in
@@ -27,12 +27,12 @@ function Login() {
           signIn(email,password)
           .then(result => {
                const user = result.user 
-               if(user){
-                    alert('login success fully')
-               }
                setUser(user)               
           })
           .catch(err => console.log(err))
+     }
+	if(loading){
+          return <div className='h-screen flex flex-col justify-center items-center  w-full'><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-400"></div></div>
      }
 
   return (

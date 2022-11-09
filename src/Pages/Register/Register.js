@@ -4,7 +4,7 @@ import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 function Register() {
     
- const {createUser,setUser} = useContext(AuthContext)
+ const {createUser,setUser,loading} = useContext(AuthContext)
 
      const handleSubmit = event =>{
           event.preventDefault()
@@ -14,13 +14,13 @@ function Register() {
           createUser(email, password)
           .then(result => {
                const user = result.user
-               if(user){
-                    alert('sign up success fully')
-               }
                setUser(user)
           })
           .catch(err => console.log(err))
           
+     }
+     if(loading){
+          return <div className='h-screen flex flex-col justify-center items-center h-full w-full'><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-400"></div></div>
      }
      
 

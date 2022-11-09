@@ -12,15 +12,21 @@ function AuthProvider({children}) {
   
  //Hooks for user 
 const [user, setUser] = useState(null)
+const [loading, setLoading] = useState(false)
+
+
+
 
 
 //create user with email password
 const createUser = (email,password) =>{
+     setLoading(true)
   return createUserWithEmailAndPassword(auth,email, password)
 }
 
 //sign in with email password
 const signIn = (email,password) =>{
+     setLoading(true)
      return signInWithEmailAndPassword(auth, email, password)
 }
 
@@ -38,9 +44,11 @@ const logOut = () =>{
 useEffect(() =>{
      const unsubscribe = onAuthStateChanged(auth,(currentuser) =>{
          setUser(currentuser)
+         setLoading(false)
      })
      return () =>{
           unsubscribe()
+          
      }
 
 },[])
@@ -53,10 +61,10 @@ const authInfo ={
      signInwithgoogle,
      user,
      setUser,
-     logOut
+     logOut,
+     loading,
 
 }
-
 
   return (
     <div>
