@@ -31,7 +31,7 @@ function Home() {
         }
       </div>  
       <div className="flex justify-center mt-4 mb-6">
-     <button className="btn btn-outline btn-primary">see all services</button>
+    <Link to='/services'><button className="btn btn-outline btn-primary">see all services</button></Link> 
      <div>
       {/* detils section */}
      </div>   
