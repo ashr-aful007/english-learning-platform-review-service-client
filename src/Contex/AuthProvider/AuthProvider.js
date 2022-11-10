@@ -11,12 +11,8 @@ const auth = getAuth(app)
 function AuthProvider({children}) {
   
  //Hooks for user 
-const [user, setUser] = useState(null)
+const [user, setUser] = useState({})
 const [loading, setLoading] = useState(false)
-
-
-
-
 
 //create user with email password
 const createUser = (email,password) =>{
@@ -47,7 +43,7 @@ useEffect(() =>{
          setLoading(false)
      })
      return () =>{
-          unsubscribe()
+        return unsubscribe()
           
      }
 
