@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MyReviws from '../MyReviews/MyReviws'
+
 
 function ShowMyRevies({myreview,handleDelete, handleUpdate,modalButton}) { 
      const {name,reviws,email,displayName,_id} = myreview
@@ -7,9 +7,10 @@ function ShowMyRevies({myreview,handleDelete, handleUpdate,modalButton}) {
      
   return (
      <div>
-          <MyReviws myreview={myreview}></MyReviws>
-          
-               <div className='mt-11 mb-7'>
+          {myreview.length === 0 ? <>
+          <h1 className='font-bold text-5xl h-full flex flex-col justify-center items-center'>No Revewis Yet!</h1>
+          </> : <>
+          <div className='mt-11 mb-7'>
                <div className="container flex flex-col w-full  max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-gray-900 text-gray-100">
           <div className="flex justify-between p-4">
                <div className="flex space-x-4">
@@ -37,6 +38,8 @@ function ShowMyRevies({myreview,handleDelete, handleUpdate,modalButton}) {
           </div>
           </div>
           </div>
+
+          </>}
      </div>
   )
 }

@@ -69,7 +69,7 @@ function MyReviws() {
           <div className="modal-box">
           <h3 className="font-bold text-lg">{data.name}</h3>
           <h3 className="font-bold text-lg">{data.email}</h3>
-          <p className="py-4">{data.reviws}</p>
+          <p className="py-4">{data?.reviws}</p>
           <div className="modal-action">
                <label htmlFor="my-modal-6" className="btn">Yay!</label>
           </div>
