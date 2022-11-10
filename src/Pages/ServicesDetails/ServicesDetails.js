@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 import CatagoryComment from '../CatagoryComment/CatagoryComment'
-import CommentSection from '../CommentsSection/CommentSection'
 import './ServicesDetails.css'
 
 function ServicesDetails() {
@@ -11,15 +10,39 @@ function ServicesDetails() {
      const {description,img,name,price,_id} = serviceDetails
      const {user} = useContext(AuthContext)
 
-     const handleOnfoucs = event =>{
-          const serviceReviwes = (event.target.value)
-          if(serviceReviwes === ''){
-              alert('Plz provide valid reviews')
-          }
-          else{
-            Setreviws(serviceReviwes)
-          }       
+     const handleOnsubmit = event =>{
+           event.preventDefault() 
+           const from = event.target;
+           const reviewInput = from.reviewInput.value
+           if(reviewInput.value === ""){
+             alert('plase provide valid revews')
+           }else{
+            Setreviws(reviewInput)
+           }
+               
      }
+     const [reviewsData, SetreviewsData] = useState('')
+     const {email,displayName} = user;
+     const reviews ={
+      serviceId: _id,
+      name,
+      email,
+      displayName,
+      reviws,
+      
+     }
+     
+     useEffect(() =>{
+        fetch('http://localhost:5000/reviews',{
+          method: 'POST',
+          headers:{
+            'content-type' : 'application/json'
+          },
+          body: JSON.stringify(reviews)
+        })
+        .then(res => res.json())
+        .then(data => SetreviewsData(data))
+     },[reviws])
      
   return (
     <div className='mb-5'>
@@ -43,12 +66,11 @@ function ServicesDetails() {
           </div>       
           <div>  
               <CatagoryComment _id={_id}></CatagoryComment>
-            {/* share data for comment section */}
-           <CommentSection name={name} _id={_id} reviws={reviws}/>
+            {/* share data for comment section */}          
            <div className=''>
             {
               user?.email ? <>
-              <div className="flex overflow-hidden flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
+              <form onSubmit={handleOnsubmit} className="flex overflow-hidden w-full flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
               <div className="flex flex-col items-center w-full">
                 <h2 className="text-3xl font-semibold text-center">Provide your reviews!</h2>
                 <div className="flex flex-col items-center py-6 space-y-3">
@@ -82,14 +104,14 @@ function ServicesDetails() {
                   </div>
                 </div>
                 <div className="flex flex-col w-full">
-                  <textarea onBlur={handleOnfoucs} name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"required></textarea>
+                  <textarea name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"required></textarea>
                   <button className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400">Write your experience!</button>
                 </div>
               </div>
               <div className="flex items-center justify-center">
                <button className='btn'>submit</button>
               </div>
-            </div>
+            </form>
               </> : 
               <><Link to='/register'><button className='btn btn-outline btn-primary'>write your reviews</button></Link></>
             }

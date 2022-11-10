@@ -11,11 +11,13 @@ function CatagoryComment({_id}) {
        .then(res => res.json())
        .then(data => SetCatagoryRevews(data))
     },[])
-    catagoyRevews.map(data => console.log(data))
+    
   return (
     <div>
      {
-       catagoyRevews.map(reviews => <ShowSingleReviws reviews={reviews}></ShowSingleReviws>)   
+       catagoyRevews.map(reviews => <ShowSingleReviws reviews={reviews}
+          key={reviews._id}
+       ></ShowSingleReviws>)   
      }  
     </div>
   )
