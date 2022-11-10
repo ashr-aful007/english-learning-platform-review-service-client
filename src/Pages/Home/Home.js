@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
+import useTitle from '../../Hooks/UseTaitel'
 import DitlsSection from '../../Shared/Header/DitlsSection'
 import Showheaderservice from '../Showheaderservice/Showheaderservice'
 import './Home.css'
@@ -7,6 +8,7 @@ import Information from './Information'
 
 function Home() {
   const services = useLoaderData()
+  useTitle('Home')
   
   return (
     <div>

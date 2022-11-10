@@ -1,6 +1,8 @@
 import React from 'react'
+import useTitle from '../../Hooks/UseTaitel'
 
 function Blog() {
+	useTitle('Blog')
   return (
 	<div >
     <div>

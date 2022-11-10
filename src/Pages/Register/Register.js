@@ -1,14 +1,17 @@
 import React, { useContext } from 'react'
 import { Link, Navigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
+import useTitle from '../../Hooks/UseTaitel'
 
 function Register() {
     
  const {createUser,setUser,loading} = useContext(AuthContext)
 
  const location = useLocation()
+
+ useTitle('Register')
  
-//  const from = location.state.from.pathname || '/';
+//  const from = location?.state?.from?.pathname || '/';
      const handleSubmit = event =>{
           
           event.preventDefault()

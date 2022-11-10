@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
+import useTitle from '../../Hooks/UseTaitel'
 
 
 
@@ -18,6 +19,8 @@ function Login() {
           })
           .catch(err => console.log(err))
     }
+
+    useTitle('Login')
 
      const handleloginSubmit = event =>{
           event.preventDefault()
