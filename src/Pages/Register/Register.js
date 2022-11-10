@@ -1,20 +1,25 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 function Register() {
     
  const {createUser,setUser,loading} = useContext(AuthContext)
 
+ const location = useLocation()
+ 
+//  const from = location.state.from.pathname || '/';
      const handleSubmit = event =>{
+          
           event.preventDefault()
-          const from = event.target;
-          const email = from.email.value;
-          const password = from.email.value;
+          const form = event.target;
+          const email = form.email.value;
+          const password = form.email.value;
           createUser(email, password)
           .then(result => {
                const user = result.user
                setUser(user)
+               // Navigate(from,{replace : true})
           })
           .catch(err => console.log(err))
           

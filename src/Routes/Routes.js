@@ -1,12 +1,15 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Main from '../Layout/Main/Main'
+import AddService from '../Pages/AddService/AddService'
 import ErrorPage from '../Pages/ErrorPage/ErrorPage'
 import Home from '../Pages/Home/Home'
 import Login from '../Pages/Login/Login'
+import MyReviws from '../Pages/MyReviews/MyReviws'
 import Register from '../Pages/Register/Register'
 import Service from '../Pages/Service/Service'
 import ServicesDetails from '../Pages/ServicesDetails/ServicesDetails'
+import PrivetRoute from './PriveteRoute/PrivetRoute'
 
 
 const Routes = createBrowserRouter([
@@ -36,6 +39,14 @@ const Routes = createBrowserRouter([
                {
                     path: '/register',
                     element:<Register></Register>
+               },
+               {
+                    path: '/myReviews',
+                    element: <PrivetRoute><MyReviws></MyReviws></PrivetRoute>
+               },
+               {
+                    path: '/addService',
+                    element: <PrivetRoute><AddService></AddService></PrivetRoute>
                }
           ]
      }

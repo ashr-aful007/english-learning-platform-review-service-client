@@ -6,24 +6,23 @@ import './ServicesDetails.css'
 
 function ServicesDetails() {
      const [reviws, Setreviws] = useState('')
+     const [reviewsData, SetreviewsData] = useState('')
+     
+     const {user} = useContext(AuthContext)
+     const {email,displayName} = user;
+
      const serviceDetails = useLoaderData()
      const {description,img,name,price,_id} = serviceDetails
-     const {user} = useContext(AuthContext)
+ 
 
      const handleOnsubmit = event =>{
            event.preventDefault() 
            const from = event.target;
            const reviewInput = from.reviewInput.value
-           if(reviewInput.value === ""){
-             alert('plase provide valid revews')
-           }else{
-            Setreviws(reviewInput)
-           }
-               
+           Setreviws(reviewInput)            
      }
-     const [reviewsData, SetreviewsData] = useState('')
-     const {email,displayName} = user;
-     const reviews ={
+      
+     const reviewsdata ={
       serviceId: _id,
       name,
       email,
@@ -38,7 +37,7 @@ function ServicesDetails() {
           headers:{
             'content-type' : 'application/json'
           },
-          body: JSON.stringify(reviews)
+          body: JSON.stringify(reviewsdata)
         })
         .then(res => res.json())
         .then(data => SetreviewsData(data))
@@ -104,7 +103,7 @@ function ServicesDetails() {
                   </div>
                 </div>
                 <div className="flex flex-col w-full">
-                  <textarea name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"required></textarea>
+                  <textarea name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900" required></textarea>
                   <button className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400">Write your experience!</button>
                 </div>
               </div>
