@@ -4,7 +4,7 @@ import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 
 function CommentSection({name, _id, reviws}) {
 	 const {user} = useContext(AuthContext)
-	 const [reviewsData, SetreviewsData] = useState({})
+	 const [reviewsData, SetreviewsData] = useState([])
 	 const {email,displayName} = user;
 	 const reviews ={
 		serviceId: _id,

@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
+import CatagoryComment from '../CatagoryComment/CatagoryComment'
 import CommentSection from '../CommentsSection/CommentSection'
 import './ServicesDetails.css'
 
 function ServicesDetails() {
-     const [reviws, Setreviws] = useState('its good')
+     const [reviws, Setreviws] = useState('')
      const serviceDetails = useLoaderData()
      const {description,img,name,price,_id} = serviceDetails
      const {user} = useContext(AuthContext)
@@ -41,13 +42,13 @@ function ServicesDetails() {
         </div>
           </div>       
           <div>  
-
+              <CatagoryComment _id={_id}></CatagoryComment>
             {/* share data for comment section */}
            <CommentSection name={name} _id={_id} reviws={reviws}/>
            <div className=''>
             {
               user?.email ? <>
-              <from className="flex overflow-hidden flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
+              <div className="flex overflow-hidden flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
               <div className="flex flex-col items-center w-full">
                 <h2 className="text-3xl font-semibold text-center">Provide your reviews!</h2>
                 <div className="flex flex-col items-center py-6 space-y-3">
@@ -81,14 +82,14 @@ function ServicesDetails() {
                   </div>
                 </div>
                 <div className="flex flex-col w-full">
-                  <textarea onBlur={handleOnfoucs} name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900" spellcheck="false"></textarea>
+                  <textarea onBlur={handleOnfoucs} name='reviewInput' rows="3" placeholder="reviews..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"required></textarea>
                   <button className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400">Write your experience!</button>
                 </div>
               </div>
               <div className="flex items-center justify-center">
                <button className='btn'>submit</button>
               </div>
-            </from>
+            </div>
               </> : 
               <><Link to='/register'><button className='btn btn-outline btn-primary'>write your reviews</button></Link></>
             }
