@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
-import ShowModal from '../ShowModal/ShowModal'
 import ShowMyRevies from '../ShowMyReview/ShowMyRevies'
 
 function MyReviws() {
@@ -9,7 +8,7 @@ function MyReviws() {
 
      const {user} = useContext(AuthContext)
      useEffect(()=>{
-       fetch(`http://localhost:5000/reviews?email=${user?.email}`)  
+       fetch(`https://english-learning-platform-service-review-server.vercel.app/reviews?email=${user?.email}`)  
        .then(res => res.json())
        .then(data => SetmyReviews(data)) 
      }, [])
@@ -18,7 +17,7 @@ function MyReviws() {
      const  handleDelete = id =>{
       const porssid = window.confirm('Are you sure you want to delete it!')
       if(porssid){
-           fetch(`http://localhost:5000/reviews/${id}`,{
+           fetch(`https://english-learning-platform-service-review-server.vercel.app/reviews/${id}`,{
                 method: 'DELETE'
            })
            .then(res => res.json())
@@ -36,7 +35,7 @@ function MyReviws() {
 
     const proccid = window.confirm('Do you sure you want to update')
     if(proccid){
-      fetch(`http://localhost:5000/reviews/${myreview._id}`,{
+      fetch(`https://english-learning-platform-service-review-server.vercel.app/reviews/${myreview._id}`,{
         method: 'PATCh',
         headers: {
            'content-type' : 'application/json'
@@ -79,7 +78,10 @@ function MyReviws() {
       }
 
   
-    <div className='h-full'>
+    <div>
+      {
+        myReviews.length === 0 ?  <><h1 className='font-bold text-5xl flex flex-col h-screen justify-center items-center'>No review found</h1></> : <>
+          <div className='h-full'>
           {
             myReviews.map(myreview => <ShowMyRevies 
               handleDelete={handleDelete}
@@ -88,6 +90,9 @@ function MyReviws() {
               handleUpdate={handleUpdate}              
             ></ShowMyRevies>)
           }
+    </div>
+        </>
+      }
     </div>
     </div>
   )

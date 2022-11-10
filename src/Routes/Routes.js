@@ -21,7 +21,7 @@ const Routes = createBrowserRouter([
           children:[
                {
                     path: '/',
-                    loader: () => fetch('http://localhost:5000/fewservices'),
+                    loader: () => fetch('https://english-learning-platform-service-review-server.vercel.app/fewservices'),
                     element: <Home></Home>
                },
                {
@@ -30,7 +30,7 @@ const Routes = createBrowserRouter([
                },
                {
                     path:'/servicesDetails/:id',
-                    loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`),
+                    loader: ({params}) => fetch(`https://english-learning-platform-service-review-server.vercel.app/services/${params.id}`),
                     element: <ServicesDetails></ServicesDetails>
                },
                {
@@ -52,7 +52,7 @@ const Routes = createBrowserRouter([
                {
                     path: '/blog',
                     element: <Blog></Blog>
-               }
+               },
           ]
      }
 ])

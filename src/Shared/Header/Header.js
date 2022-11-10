@@ -45,7 +45,11 @@ function Header() {
     </ul>
   </div>
   <div className="navbar-end">
-  <button onClick={handleLogOut} to='logout'>Log Out</button>
+  {
+    user?.uid ? <><button onClick={handleLogOut} to='logout'>Log Out</button></> : <>
+    
+    </>
+  }
   </div>
 </div>
     </div>

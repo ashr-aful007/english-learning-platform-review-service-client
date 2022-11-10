@@ -32,7 +32,7 @@ function ServicesDetails() {
      }
      
      useEffect(() =>{
-        fetch('http://localhost:5000/reviews',{
+        fetch('https://english-learning-platform-service-review-server.vercel.app/reviews',{
           method: 'POST',
           headers:{
             'content-type' : 'application/json'

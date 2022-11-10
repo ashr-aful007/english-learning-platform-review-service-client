@@ -7,7 +7,7 @@ function CatagoryComment({_id}) {
      
      
     useEffect(() =>{
-       fetch(`http://localhost:5000/reviews/${_id}`)
+       fetch(`https://english-learning-platform-service-review-server.vercel.app/${_id}`)
        .then(res => res.json())
        .then(data => SetCatagoryRevews(data))
     },[])
