@@ -37,7 +37,7 @@ function MyReviws() {
     const proccid = window.confirm('Do you sure you want to update')
     if(proccid){
       fetch(`https://english-learning-platform-service-review-server.vercel.app/reviews/${myreview._id}`,{
-        method: 'PATCh',
+        method: 'PATCH',
         headers: {
            'content-type' : 'application/json'
         },

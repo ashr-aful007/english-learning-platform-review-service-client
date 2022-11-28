@@ -5,11 +5,11 @@ import CatagoryComment from '../CatagoryComment/CatagoryComment'
 import './ServicesDetails.css'
 
 function ServicesDetails() {
-     const [reviws, Setreviws] = useState('')
-     const [reviewsData, SetreviewsData] = useState('')
+    //  const [reviws, Setreviws] = useState('')
+    //  const [reviewsData, SetreviewsData] = useState('')
      
      const {user} = useContext(AuthContext)
-     const {email,displayName} = user;
+     const {email} = user;
 
      const serviceDetails = useLoaderData()
      const {description,img,name,price,_id} = serviceDetails
@@ -18,30 +18,25 @@ function ServicesDetails() {
      const handleOnsubmit = event =>{
            event.preventDefault() 
            const from = event.target;
-           const reviewInput = from.reviewInput.value
-           Setreviws(reviewInput)            
+           const reviewInput = from.reviewInput.value  
+           const reviewsdata ={
+            serviceId: _id,
+            name,
+            email,
+            reviws: reviewInput,
+            
+           }      
+           fetch('https://english-learning-platform-service-review-server.vercel.app/reviews',{
+            method: 'POST',
+            headers:{
+              'content-type' : 'application/json'
+            },
+            body: JSON.stringify(reviewsdata)
+          })
+          .then(res => res.json())
+          .then(data => console.log(data))  
      }
-      
-     const reviewsdata ={
-      serviceId: _id,
-      name,
-      email,
-      displayName,
-      reviws,
-      
-     }
-     
-     useEffect(() =>{
-        fetch('https://english-learning-platform-service-review-server.vercel.app/reviews',{
-          method: 'POST',
-          headers:{
-            'content-type' : 'application/json'
-          },
-          body: JSON.stringify(reviewsdata)
-        })
-        .then(res => res.json())
-        .then(data => SetreviewsData(data))
-     },[reviws])
+    
      
   return (
     <div className='mb-5'>
