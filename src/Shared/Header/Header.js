@@ -9,14 +9,12 @@ function Header() {
 		logOut()
 	}
 	const vanMenu = <>
-	 <li><Link to='/'>Home</Link></li>
-	 <li><Link to='/blog'>Blog</Link></li>
-	 <li><Link to='/register'>Register</Link></li>
+   <li className='font-sans'><Link to='/'>Home</Link></li>
+	 <li className='font-sans'><Link to='/blog'>Blog</Link></li>
 	 {
-		user?.email ? <>
-		<li><Link to='myReviews'>My Reviwes</Link></li>
-		<li><Link to='addService'>Add Service</Link></li>		
-		</> : <></>
+		user?.email &&
+		<><li className='font-sans'><Link to='myReviews'>My Reviwes</Link></li>
+		<li className='font-sans'><Link to='addService'>Add Service</Link></li></>		
 	 }
 	</>
 	
@@ -35,7 +33,7 @@ function Header() {
     </div>
     <Link to="/" className="normal-case ">
       {
-		user?.photoURL ? <><img src={user?.photoURL} alt=''></img></> : <><p>{user?.email}</p></>
+		user?.photoURL ? <><img src={user?.photoURL} alt=''></img></> : <><p className='text-sm'>{user?.email}</p></>
 	 }
     </Link>
   </div>
@@ -46,8 +44,8 @@ function Header() {
   </div>
   <div className="navbar-end">
   {
-    user?.uid ? <><button onClick={handleLogOut} to='logout'>Log Out</button></> : <>
-    
+    user?.uid ? <><button className='text-sm p-5' onClick={handleLogOut} to='logout'>Log Out</button></> : <>
+    <button className='font-sans'><Link to='/register'>Register</Link></button>
     </>
   }
   </div>

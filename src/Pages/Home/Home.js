@@ -19,8 +19,8 @@ function Home() {
         </div>
       </div>
       <div>
-      <div className="space-y-2 text-center mt-10 mb-10">
-			<h2 className="text-3xl font-bold">My all services</h2>
+      <div className="space-y-2 text-center my-12">
+			<h2 className="text-3xl font-serif font-bold">My all services</h2>
 			<p className="font-serif text-sm dark:text-gray-400">Explore my all services and chose your best one!</p>
 		</div>
       </div>

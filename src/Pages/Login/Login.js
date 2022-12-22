@@ -1,15 +1,20 @@
 import React, { useContext } from 'react'
 import { GoogleAuthProvider } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Contex/AuthProvider/AuthProvider'
 import useTitle from '../../Hooks/UseTaitel'
+import { useState } from 'react'
 
 
 
 function Login() {
      const {signIn,setUser,signInwithgoogle,loading} = useContext(AuthContext)
+     const [loginError, setError] = useState('')
      const provider = new GoogleAuthProvider()
+	const location = useLocation()
+	const navigate = useNavigate()
 
+	 
      //google sign in
     const  handlegooglesingin = () =>{
           signInwithgoogle(provider)
@@ -17,22 +22,26 @@ function Login() {
                const user = result.user;
                setUser(user)
           })
-          .catch(err => console.log(err))
+          .catch(err => setError(err.message))
     }
-
+    //Constom Hook
     useTitle('Login')
+
+    const form = location?.state?.from?.pathname || '/';
 
      const handleloginSubmit = event =>{
           event.preventDefault()
           const from = event.target;
           const email = from.email.value;
           const password = from.password.value;
-          signIn(email,password)
+	     console.log(email, password)
+          signIn(email, password)
           .then(result => {
                const user = result.user 
-               setUser(user)               
+			navigate(form, {replace: true})
+			from.reset()           
           })
-          .catch(err => console.log(err))
+          .catch(err => setError(err.message))
      }
 	if(loading){
           return <div className='h-screen flex flex-col justify-center items-center  w-full'><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-400"></div></div>
@@ -42,7 +51,7 @@ function Login() {
     <div onSubmit={handleloginSubmit} className='h-screen w-full sm:w-1/2  mx-auto mt-12'>
      <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-purple-600 dark:text-gray-100">
 	<h1 className="text-2xl font-bold text-center text-white">Login</h1>
-	<form novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+	<form  action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
 		<div className="space-y-1 text-sm">
 			<label for="Email" className="block text-gray-400">Email</label>
 			<input type="email" name="email" id="username" placeholder="Emali" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
@@ -54,6 +63,7 @@ function Login() {
 				<Link className='text-gray-400' to='' href="#">Forgot Password?</Link>
 			</div>
 		</div>
+		{loginError && <p className='text-red-400'>{loginError}</p>}
 		<button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-violet-400">Sign in</button>
 	</form>
 	<div className="flex items-center pt-4 space-x-1">
